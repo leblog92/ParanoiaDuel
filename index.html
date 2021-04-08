@@ -12,9 +12,10 @@ body{
 overflow:hidden;
 background-color:lightgrey;
 font-family:consolas;
+user-select:none;
 }
-#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
-transition:200ms;
+#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#warp1,#warp2,#blue_p,#orange_p,#death,#end,#select{
+transition:500ms;
 }
 table{
 margin-left: auto;
@@ -29,25 +30,17 @@ border-collapse:collapse;
 dominant-baseline:middle;
 text-anchor:middle;
 }
-#light{
-opacity:0;
-transition:1s;
-}
-#light:hover{
-opacity:0.6;
-}
-
 </style>
 </head>
 <body>
 <svg width="500px" height="500px" viewBox="0 0 100 100" id="svg1" onmousemove="showCoords(event)">
 <defs>
-	<filter height="200%" width="200%" y="-50%" x="-50%" id="blur1">
-	<feGaussianBlur stdDeviation="0.1" in="SourceGraphic"/>
-	</filter>
-	<filter height="200%" width="200%" y="-50%" x="-50%" id="blur2">
-	<feGaussianBlur stdDeviation="0.5" in="SourceGraphic"/>
-	</filter>
+<filter height="200%" width="200%" y="-50%" x="-50%" id="blur1">
+<feGaussianBlur stdDeviation="0.1" in="SourceGraphic"/>
+</filter>
+<filter height="200%" width="200%" y="-50%" x="-50%" id="blur2">
+<feGaussianBlur stdDeviation="0.5" in="SourceGraphic"/>
+</filter>
 </defs>
 
 <rect width="100" height="100" fill="grey" rx="9" ry="9"></rect>
@@ -88,16 +81,16 @@ opacity:0.6;
 <text class="center" y="0.2" fill="#ad8762" font-size="4px">📦</text>
 </g>
 
-<g id="warp1" transform="translate(50 50)" filter="url(#blur1)">
+<g id="warp1" transform="translate(50 50)" filter="url(#blur2)">
 <circle cx="0" cy="0" fill="green" r="1.5"/>
-<circle cx="0" cy="0" fill="#0f0" r="0.75">
+<circle cx="0" cy="0" fill="#0f0" r="0.5">
 <animate attributeName="fill" values="#0f0;green;#0f0" begin="0s" dur="0.5s" repeatCount="indefinite"/>
 </circle>
 </g>
 
-<g id="warp2" transform="translate(50 50)" filter="url(#blur1)">
+<g id="warp2" transform="translate(50 50)" filter="url(#blur2)">
 <circle cx="0" cy="0" fill="green" r="1.5"/>
-<circle cx="0" cy="0" fill="#0f0" r="0.75">
+<circle cx="0" cy="0" fill="#0f0" r="0.5">
 <animate attributeName="fill" values="#0f0;green;#0f0" begin="0s" dur="0.5s" repeatCount="indefinite"/>
 </circle>
 </g>
@@ -130,14 +123,14 @@ opacity:0.6;
 <text class="center" y="0.5" id="trophy" fill="gold" font-size="4px">🏆</text>
 </g>
 
-<g id="spot" transform="translate(0 0)">
-<circle id="light" cx="0" cy="0" fill="white" r="4" filter="url(#blur2)"/>
+<g id="select" transform="translate(0 0)">
+<text class="center" y="0.5" id="item" fill="gold" font-size="5px">🧨</text>
 </g>
 
 </svg>
 
 <div id="div1"></div>
-<div id="div2"> </div>
+<div id="div2"></div>
 
 <script>
 var mx,my,mcoor;
@@ -164,7 +157,7 @@ var warp2=document.getElementById("warp2");
 var blue_p=document.getElementById("blue_p");
 var orange_p=document.getElementById("orange_p");
 var death=document.getElementById("death");
-var spot=document.getElementById("spot");
+var select=document.getElementById("select");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","warp1","warp2","blue_p","orange_p","death","end"];
 var used_space=["10 10","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
 var faces=["0.png","1.png","2.png",];
@@ -233,18 +226,18 @@ used_space=Object.assign([],used_space,{[13]:coor[pos_death]});
 div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
 }
 
-setInterval(reset,300);
+setInterval(reset,1000);
 
 function showCoords(event) {
   mx=(Math.round(((event.clientX-rect_left)/5)/10)*10);
   if(mx<10){mx=10};if(mx>90){mx=90};
   my=(Math.round(((event.clientY-rect_top)/5)/10)*10);
   if(my<10){my=10};if(my>90){my=90};
-  spot.setAttribute("transform", "translate("+mx+" "+my+")");
+  select.setAttribute("transform", "translate("+mx+" "+my+")");
   mcoor="X coords: "+mx+", Y coords: "+my;
   div1.innerHTML=mcoor;
 }
-//reset();
+
 </script>
 </body>
 </html>
