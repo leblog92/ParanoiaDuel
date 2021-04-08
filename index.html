@@ -13,8 +13,8 @@ overflow:hidden;
 background-color:lightgrey;
 font-family:consolas;
 }
-#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
-transition:400ms;
+#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#warp1,#warp2,#blue_p,#orange_p,#death,#end,#spot{
+transition:500ms;
 }
 table{
 margin-left: auto;
@@ -31,7 +31,7 @@ text-anchor:middle;
 }
 #light{
 opacity:0;
-transition:1s;
+transition:500ms;
 }
 #light:hover{
 opacity:0.6;
@@ -131,7 +131,7 @@ opacity:0.6;
 </g>
 
 <g id="spot" transform="translate(0 0)">
-<circle id="light" cx="0" cy="0" fill="white" r="4" filter="url(#blur2)"/>
+<circle id="light" cx="0" cy="0" fill="white" r="5" filter="url(#blur2)"/>
 </g>
 
 </svg>
@@ -233,12 +233,12 @@ used_space=Object.assign([],used_space,{[13]:coor[pos_death]});
 div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
 }
 
-setInterval(reset,500);
+setInterval(reset,600);
 
 function showCoords(event) {
-  mx=(Math.round(((event.clientX-rect_left)/5)/10)*10);
+  mx=(Math.round(Math.round((event.clientX-rect_left)/5)/10)*10);
   if(mx<10){mx=10};if(mx>90){mx=90};
-  my=(Math.round(((event.clientY-rect_top)/5)/10)*10);
+  my=(Math.round(Math.round((event.clientY-rect_top)/5)/10)*10);
   if(my<10){my=10};if(my>90){my=90};
   spot.setAttribute("transform", "translate("+mx+" "+my+")");
   mcoor="X coords: "+mx+", Y coords: "+my;
