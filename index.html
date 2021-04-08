@@ -14,7 +14,7 @@ background-color:lightgrey;
 font-family:consolas;
 }
 #player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
-transition:1000ms;
+transition:400ms;
 }
 table{
 margin-left: auto;
@@ -29,20 +29,25 @@ border-collapse:collapse;
 dominant-baseline:middle;
 text-anchor:middle;
 }
-<!--.dot{
-transition:0.5s;
+#light{
+opacity:0;
+transition:1s;
 }
-.dot:hover{
+#light:hover{
 opacity:0.6;
-}-->
+}
+
 </style>
 </head>
 <body>
 <svg width="500px" height="500px" viewBox="0 0 100 100" id="svg1" onmousemove="showCoords(event)">
 <defs>
-<filter height="200%" width="200%" y="-50%" x="-50%" id="blur">
-<feGaussianBlur stdDeviation="0.1" in="SourceGraphic"/>
-</filter>
+	<filter height="200%" width="200%" y="-50%" x="-50%" id="blur1">
+	<feGaussianBlur stdDeviation="0.1" in="SourceGraphic"/>
+	</filter>
+	<filter height="200%" width="200%" y="-50%" x="-50%" id="blur2">
+	<feGaussianBlur stdDeviation="0.5" in="SourceGraphic"/>
+	</filter>
 </defs>
 
 <rect width="100" height="100" fill="grey" rx="9" ry="9"></rect>
@@ -52,45 +57,45 @@ opacity:0.6;
 <path d="m10 10L90 10L90 20L10 20L10 30L90 30L90 40L10 40L10 50L90 50L90 60L10 60L10 70L90 70L90 80L10 80L10 90L91 90" fill="none" stroke="grey" stroke-width="2px" stroke-dasharray="0 10" stroke-linecap="round"/>
 
 <g id="bonus1" transform="translate(50 50)">
-<text class="center" y="0.2" fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
 <g id="bonus2" transform="translate(50 50)">
-<text class="center" y="0.2"fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2"fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
 <g id="bonus3" transform="translate(50 50)">
-<text class="center" y="0.2" fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
 <g id="bonus4" transform="translate(50 50)">
-<text class="center" y="0.2" fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
 <g id="bonus5" transform="translate(50 50)">
-<text class="center" y="0.2" fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
 <g id="bonus6" transform="translate(50 50)">
-<text class="center" y="0.2" fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
 <g id="bonus7" transform="translate(50 50)">
-<text class="center" y="0.2" fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
 <g id="bonus8" transform="translate(50 50)">
-<text class="center" y="0.2" fill="#000" font-size="4px">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4px">🎱</text>
 </g>
 
-<g id="warp1" transform="translate(50 50)" filter="url(#blur)">
+<g id="warp1" transform="translate(50 50)" filter="url(#blur1)">
 <circle cx="0" cy="0" fill="green" r="1.5"/>
 <circle cx="0" cy="0" fill="#0f0" r="0.75">
 <animate attributeName="fill" values="#0f0;green;#0f0" begin="0s" dur="0.5s" repeatCount="indefinite"/>
 </circle>
 </g>
 
-<g id="warp2" transform="translate(50 50)" filter="url(#blur)">
+<g id="warp2" transform="translate(50 50)" filter="url(#blur1)">
 <circle cx="0" cy="0" fill="green" r="1.5"/>
 <circle cx="0" cy="0" fill="#0f0" r="0.75">
 <animate attributeName="fill" values="#0f0;green;#0f0" begin="0s" dur="0.5s" repeatCount="indefinite"/>
@@ -98,22 +103,22 @@ opacity:0.6;
 </g>
 
 <g id="blue_p" transform="translate(50 50)">
-<g><image xlink:href="blue_p.png" x="-2.5" y="-2.5" width="5" height="5" opacity="1" filter="url(#blur)"/>
+<g><image xlink:href="blue_p.png" x="-2.5" y="-2.5" width="5" height="5" opacity="1" filter="url(#blur1)"/>
 <animateTransform attributeName="transform" attributeType="xml" type="rotate" values="0 0 0; 360 0 0" begin="0s" dur="1s" repeatCount="indefinite"/></g>
 </g>
 
 <g id="orange_p" transform="translate(50 50)">
-<g><image xlink:href="orange_p.png" x="-2.5" y="-2.5" width="5" height="5" opacity="1" filter="url(#blur)"/>
+<g><image xlink:href="orange_p.png" x="-2.5" y="-2.5" width="5" height="5" opacity="1" filter="url(#blur1)"/>
 <animateTransform attributeName="transform" attributeType="xml" type="rotate" values="0 0 0; 360 0 0" begin="0s" dur="1s" repeatCount="indefinite"/></g>
 </g>
 
-<g id="player1" transform="translate(50 50)"><g>
-<circle cx="00" cy="-2" fill="royalblue" r="1"/>
+<g id="player1" transform="translate(50 50)">
+<g><circle cx="0" cy="-2" fill="royalblue" r="1"/>
 <animateTransform attributeName="transform" attributeType="xml" type="rotate" values="0 0 0; 360 0 0" begin="0s" dur="3s" repeatCount="indefinite"/></g>
 </g>
 
 <g id="player2" transform="translate(50 50)">
-<g><circle cx="00" cy="02" fill="crimson" r="1"/>
+<g><circle cx="0" cy="02" fill="crimson" r="1"/>
 <animateTransform attributeName="transform" attributeType="xml" type="rotate" values="0 0 0; 360 0 0" begin="0s" dur="3s" repeatCount="indefinite"/></g>
 </g>
 
@@ -124,10 +129,15 @@ opacity:0.6;
 <g id="end" transform="translate(90 90)">
 <text class="center" y="0.5" id="trophy" fill="gold" font-size="4px">🏆</text>
 </g>
+
+<g id="spot" transform="translate(0 0)">
+<circle id="light" cx="0" cy="0" fill="white" r="4" filter="url(#blur2)"/>
+</g>
+
 </svg>
 
 <div id="div1"></div>
-<div id="div2"></div>
+<div id="div2"> </div>
 
 <script>
 var mx,my,mcoor;
@@ -154,8 +164,9 @@ var warp2=document.getElementById("warp2");
 var blue_p=document.getElementById("blue_p");
 var orange_p=document.getElementById("orange_p");
 var death=document.getElementById("death");
+var spot=document.getElementById("spot");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","warp1","warp2","blue_p","orange_p","death","end"];
-var used_space=["10 10","0 0",   "0 0",   "0 0",   "0 0",   "0 0",   "0 0",   "0 0",   "0 0",   "0 0",  "0 0",  "0 0",   "0 0",     "0 0",  "90 90"];
+var used_space=["10 10","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
 var faces=["0.png","1.png","2.png",];
 var coor=["10 10", "20 10", "30 10", "40 10", "50 10", "60 10", "70 10", "80 10", "90 10", "90 20",
  "80 20", "70 20", "60 20", "50 20", "40 20", "30 20", "20 20", "10 20", "10 30", "20 30", "30 30", "40 30", "50 30", "60 30", "70 30", "80 30", "90 30", "90 40", "80 40", "70 40", "60 40", "50 40", "40 40", "30 40", "20 40", "10 40", "10 50", "20 50", "30 50", "40 50", "50 50", "60 50", "70 50", "80 50", "90 50", "90 60", "80 60", "70 60", "60 60", "50 60", "40 60", "30 60", "20 60", "10 60", "10 70", "20 70", "30 70", "40 70", "50 70", "60 70", "70 70", "80 70", "90 70", "90 80", "80 80", "70 80", "60 80", "50 80", "40 80", "30 80", "20 80", "10 80", "10 90", "20 90", "30 90", "40 90", "50 90", "60 90", "70 90", "80 90", "90 90"];
@@ -222,18 +233,17 @@ used_space=Object.assign([],used_space,{[13]:coor[pos_death]});
 div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
 }
 
-setInterval(reset,2000);
+setInterval(reset,500);
 
 function showCoords(event) {
   mx=(Math.round(((event.clientX-rect_left)/5)/10)*10);
   if(mx<10){mx=10};if(mx>90){mx=90};
   my=(Math.round(((event.clientY-rect_top)/5)/10)*10);
   if(my<10){my=10};if(my>90){my=90};
+  spot.setAttribute("transform", "translate("+mx+" "+my+")");
   mcoor="X coords: "+mx+", Y coords: "+my;
   div1.innerHTML=mcoor;
 }
-
- 
 //reset();
 </script>
 </body>
