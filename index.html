@@ -16,7 +16,7 @@ font-family:consolas;
 user-select:none;
 }
 #player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus4,#bonus6,#bonus7,#bonus8,#bonus9,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
-transition:200ms;
+transition:400ms;
 }
 #selector{
 transition:250ms;
@@ -314,7 +314,7 @@ used_space=Object.assign([],used_space,{[14]:coor[pos_death]});
 //div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
 }
 
-setInterval(reset,400);
+setInterval(reset,800);
 
 function showCoords(event){
 mx=(Math.round(((event.clientX-rect_left)/5)/10)*10);
