@@ -11,9 +11,15 @@ text-align:center;
 }
 body{
 overflow-x:hidden;
-background-color:#033;
+background-color:#333;
 font-family:consolas;
 user-select:none;
+}
+#left_door,#right_door,#title{
+transition:3s;
+}
+#title{
+transition:6s;
 }
 #player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus4,#bonus6,#bonus7,#bonus8,#bonus9,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
 transition:400ms;
@@ -138,6 +144,17 @@ text-anchor:middle;
 <text class="center" y="0.5" id="item" fill="gold" font-size="5px">🧨</text>
 </g>
 
+<g id="gate">
+<g id="left_door">
+<image xlink:href="left_door.png" x="0" y="0" width="50" height="100"/>
+</g>
+<g id="right_door" transform="translate(0 0)">
+<image xlink:href="right_door.png" x="50" y="0" width="50" height="100"/>
+</g>
+<g id="title" transform="translate(0 0)">
+<image xlink:href="title.png" x="0" y="0" width="100" height="100"/>
+</g>
+</g>
 </svg>
 
 <div id="div1"></div>
@@ -240,6 +257,11 @@ var death=document.getElementById("death");
 var end=document.getElementById("end");
 var selector=document.getElementById("selector");
 var item=document.getElementById("item");
+var gate=document.getElementById("gate");
+var title=document.getElementById("title");
+var left_door=document.getElementById("left_door");
+var right_door=document.getElementById("right_door");
+
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","bonus9","warp1","warp2","blue_p","orange_p","death","end"];
 var used_space=["0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
 var faces=["0.png","1.png","2.png",];
@@ -312,10 +334,19 @@ while(used_space.includes(coor[pos_death])==true){pos_death=Math.round(Math.rand
 death.setAttribute("transform", "translate("+coor[pos_death]+")");
 used_space=Object.assign([],used_space,{[14]:coor[pos_death]});
 
-//div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
+div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
 }
 
-setInterval(reset,800);
+//setInterval(reset,800);
+reset();
+
+gate.addEventListener("click",open);
+
+function open(){
+left_door.setAttribute("transform", "translate(-50 0)");
+right_door.setAttribute("transform", "translate(50 0)");
+title.setAttribute("transform", "translate(0 -100)");
+}
 
 function showCoords(event){
 mx=(Math.round(((event.clientX-rect_left)/5)/10)*10);
