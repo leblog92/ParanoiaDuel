@@ -21,7 +21,7 @@ transition:3s;
 #title{
 transition:6s;
 }
-#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus4,#bonus6,#bonus7,#bonus8,#bonus9,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
+#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#bonus9,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
 transition:400ms;
 }
 #selector{
@@ -30,7 +30,6 @@ transition:250ms;
 table{
 width:500px;
 background-color:lightgrey;
-margin-top:8px;
 margin-left: auto;
 margin-right: auto;
 }
@@ -46,7 +45,7 @@ text-anchor:middle;
 </style>
 </head>
 <body>
-<svg width="500px" height="500px" viewBox="0 0 100 100" id="svg1" onmousemove="showCoords(event)">
+<svg width="500px" height="500px" viewBox="0 0 100 100" id="svg1">
 <defs>
 <filter height="200%" width="200%" y="-50%" x="-50%" id="blur1">
 <feGaussianBlur stdDeviation="0.1" in="SourceGraphic"/>
@@ -56,7 +55,7 @@ text-anchor:middle;
 </filter>
 </defs>
 
-<rect width="100" height="100" fill="grey" rx="4" ry="4"></rect>
+<rect width="100" height="100" fill="grey"></rect>
 
 <path d="m10 10L90 10L90 20L10 20L10 30L90 30L90 40L10 40L10 50L90 50L90 60L10 60L10 70L90 70L90 80L10 80L10 90L91 90" fill="none" stroke="black" stroke-width="2px" opacity="1"/>
 <path d="m10 10L90 10L90 20L10 20L10 30L90 30L90 40L10 40L10 50L90 50L90 60L10 60L10 70L90 70L90 80L10 80L10 90L91 90" fill="none" stroke="black" stroke-width="6px" stroke-dasharray="0 10" stroke-linecap="round"/>
@@ -157,80 +156,16 @@ text-anchor:middle;
 </g>
 </svg>
 
-<div id="div1"></div>
+<div id="divl"></div>
 <div id="div2"></div>
-
-<div id="div3" id="choice">
-<table>
-<tbody>
-<tr>
-<td id="item1_image">🧨</td>
-<td id="item2_image">👍</td>
-<td id="item3_image">🏦</td>
-</tr>
-<tr>
-<td id="item1_name">Dynamite 1D6</td>
-<td id="item2_name">Play again</td>
-<td id="item3_name">Bank +20$</td>
-</tr>
-<tr>
-<td id="item1_price">10$</td>
-<td id="item2_price">2$</td>
-<td id="item2_price">10$</td>
-</tr>
-</tbody>
-</table>
-<table class="center">
-<tbody>
-<tr>
-<td colspan="2" id="tdp1">
-<div contenteditable id="divp1">Player 1</div>
-</td>
-<td colspan="2" id="tdp2">
-<div contenteditable id="divp2">Player 2</div>
-</td>
-</tr>
-<tr>
-<td colspan="2" id="tdi1">
-<img id="ip1" src="p1.png" width="100px" height="auto"/>
-</td>
-<td colspan="2" id="tdi2">
-<img id="ip2" src="p2.png" width="100px" height="auto"/>
-</td>
-</tr>
-<tr>
-<td width="25%">
-<button id="bp1">Roll
-<br>Dice
-</button>
-</button>
-</td>
-<td width="25%" id="rp1" style="font-size:50px;color:royalblue">-</td>
-<td width="25%">
-<button id="bp2">Roll
-<br>Dice
-</button>
-</td>
-<td width="25%" id="rp2" style="font-size:50px;color:crimson;">-</td>
-</tr>
-<tr>
-<td id="gold1">0 💰</td>
-<td id="pos1">0/80</td>
-<td id="gold2">0 💰</td>
-<td id="pos2">0/80</td>
-</tr>
-<tr>
-<td colspan="4" style="background-color:whitesmoke;">
-<div id="rules">Hello</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div id="div3"></div>
+<button id="reset_button">reset</button>
+<button id="placeitem_button">place item</button>
 
 <script>
 /*jshint esversion:6*/
-var mx,my;
+var mx=50;
+var my=50;
 var svg1=document.getElementById("svg1");
 var rect=svg1.getBoundingClientRect();
 var rect_left=rect.left;
@@ -256,15 +191,16 @@ var orange_p=document.getElementById("orange_p");
 var death=document.getElementById("death");
 var end=document.getElementById("end");
 var selector=document.getElementById("selector");
-var item=document.getElementById("item");
 var gate=document.getElementById("gate");
 var title=document.getElementById("title");
 var left_door=document.getElementById("left_door");
 var right_door=document.getElementById("right_door");
+var reset_button=document.getElementById("reset_button");
+var placeitem_button=document.getElementById("placeitem_button");
 var audio_open = new Audio("open.mp3");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","bonus9","warp1","warp2","blue_p","orange_p","death","end"];
 var used_space=["0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
-var faces=["0.png","1.png","2.png",];
+var faces=["0.png","1.png","2.png","3.png","4.png","5.png","6.png"];
 var coor=["10 10", "20 10", "30 10", "40 10", "50 10", "60 10", "70 10", "80 10", "90 10", "90 20",
  "80 20", "70 20", "60 20", "50 20", "40 20", "30 20", "20 20", "10 20", "10 30", "20 30", "30 30", "40 30", "50 30", "60 30", "70 30", "80 30", "90 30", "90 40", "80 40", "70 40", "60 40", "50 40", "40 40", "30 40", "20 40", "10 40", "10 50", "20 50", "30 50", "40 50", "50 50", "60 50", "70 50", "80 50", "90 50", "90 60", "80 60", "70 60", "60 60", "50 60", "40 60", "30 60", "20 60", "10 60", "10 70", "20 70", "30 70", "40 70", "50 70", "60 70", "70 70", "80 70", "90 70", "90 80", "80 80", "70 80", "60 80", "50 80", "40 80", "30 80", "20 80", "10 80", "10 90", "20 90", "30 90", "40 90", "50 90", "60 90", "70 90", "80 90", "90 90"];
 var pos_start,pos_p1,pos_p2,pos_b1,pos_b2,pos_b3,pos_b4,pos_b5,pos_b6,pos_b7,pos_b8,pos_b9,pos_warp1,pos_warp2,pos_blue,pos_orange,pos_death;
@@ -339,17 +275,25 @@ div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+us
 
 //setInterval(reset,800);
 reset();
-
 gate.addEventListener("click",open);
+reset_button.addEventListener("click",reset);
+placeitem_button.addEventListener("click",placeItem);
 
 function open(){
+gate.removeEventListener("click",open);
 audio_open.play();
 left_door.setAttribute("transform", "translate(-50 0)");
 right_door.setAttribute("transform", "translate(50 0)");
 title.setAttribute("transform", "translate(0 -100)");
 }
 
-function showCoords(event){
+function placeItem(){
+placeitem_button.removeEventListener("click",placeItem);
+placeitem_button.style.opacity(0.5);
+svg1.addEventListener("mousemove",event=>{placeItem(event);});
+}
+
+function placeItem(event){
 mx=(Math.round(((event.clientX-rect_left)/5)/10)*10);
 if(mx<10){mx=10;}
 if(mx>90){mx=90;}
@@ -360,9 +304,6 @@ selector.setAttribute("transform", "translate("+mx+" "+my+")");
 div1.innerHTML="<table><tbody><tr><td>"+mx+"</td><td>"+my+"</td></tr></tbody></table>";
 }
 
-function random_choice(){
-div3.style.visibility="visible";
-}
 </script>
 </body>
 </html>
