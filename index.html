@@ -45,7 +45,7 @@ right:0;
 top:0;
 }
 table{
-background-color:lightgrey;
+background-color:#333;
 margin-left: auto;
 margin-right: auto;
 }
@@ -91,7 +91,7 @@ text-anchor:middle;
 </g>
 
 <g id="bonus2" transform="translate(50 50)">
-<text class="center" y="0.2"fill="#ad8762" font-size="4">📦</text>
+<text class="center" y="0.2" fill="#ad8762" font-size="4">📦</text>
 </g>
 
 <g id="bonus3" transform="translate(50 50)">
@@ -165,7 +165,7 @@ text-anchor:middle;
 </g>
 
 <g id="selector" transform="translate(50 110)">
-<text class="center" y="0.5" id="item" fill="gold" font-size="5">⚡</text>
+<text class="center" y="0.5" id="item" fill="gold" font-size="5">💣</text>
 </g>
 
 <g id="gate" opacity="0.2">
@@ -185,24 +185,41 @@ text-anchor:middle;
 <table>
 <tbody>
 <tr>
-<td>Player 1</td>
+<td style="color:royalblue;font-weight:bold;">Player 1</td>
 </tr>
 <tr>
 <td>
-<image src="p1_normal.gif" width="250px" height="250px" style="image-rendering:pixelated;background-image:radial-gradient(white 0%,transparent 70%);"/>
+<image src="p1_normal.gif" width="200px" height="200px" style="image-rendering:pixelated;"/>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 
-<div id="div2"><image src="p2_normal.gif" width="250px" height="250px"  style="image-rendering:pixelated"/></div>
+<div id="div2">
+<table>
+<tbody>
+<tr>
+<td style="color:crimson;font-weight:bold;">Player 2</td>
+</tr>
+<tr>
+<td>
+<image src="p2_normal.gif" width="200px" height="200px" style="image-rendering:pixelated;"/>
+<!--background-image:radial-gradient(white 0%,transparent 70%);-->
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 <div id="div3"></div>
 
 <div id="div4">
-<table>
+<table width="500px">
 <tbody>
+<tr>
+<td colspan="3">Hello</td>
+</tr>
 <tr>
 <td id="item1_image">📦</td>
 <td id="item2_image">📦</td>
@@ -331,7 +348,6 @@ pos_death=Math.round(Math.random()*(coor.length-1));
 while(used_space.includes(coor[pos_death])==true){pos_death=Math.round(Math.random()*(coor.length-1));}
 death.setAttribute("transform", "translate("+coor[pos_death]+")");
 used_space=Object.assign([],used_space,{[14]:coor[pos_death]});
-
 }
 
 reset();
@@ -358,6 +374,7 @@ if(my<10){my=10;}
 if(my>90){my=90;}
 selector.setAttribute("transform", "translate("+mx+" "+my+")");
 }
+
 </script>
 </body>
 </html>
