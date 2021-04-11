@@ -11,7 +11,7 @@ margin:0;
 text-align:center;
 }
 body{
-background-color:#333;
+background-color:#111;
 font-family:consolas;
 user-select:none;
 }
@@ -24,8 +24,26 @@ transition:6s;
 #player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#bonus9,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
 transition:400ms;
 }
+#reset_button{
+background-color:lightgrey;
+border-radius:5px;
+padding:5px;
+padding-left:10px;
+padding-right:10px;
+}
 #selector{
 transition:250ms;
+}
+<!--#svg1{}-->
+#div1{
+position:fixed;
+left:0;
+top:0;
+}
+#div2{
+position:fixed;
+right:0;
+top:0;
 }
 table{
 width:500px;
@@ -47,6 +65,11 @@ text-anchor:middle;
 <body>
 <svg width="500px" height="500px" viewBox="0 0 100 100" id="svg1">
 <defs>
+<filter id="fecolor">
+<fecolormatrix type="hueRotate">
+<animate attributename="values" begin="0s" dur="6s" values="0;360;0" repeatcount="indefinite"/>
+</fecolormatrix>
+</filter>
 <filter height="200%" width="200%" y="-50%" x="-50%" id="blur1">
 <feGaussianBlur stdDeviation="0.1" in="SourceGraphic"/>
 </filter>
@@ -56,7 +79,10 @@ text-anchor:middle;
 </defs>
 
 <rect width="100" height="100" fill="grey"></rect>
-<image xlink:href="red.gif" width="100" height="100" opacity="0.5"/>
+<g>
+<image xlink:href="space.jpg" width="100" height="100"/><image xlink:href="space.jpg" x="99" width="100" height="100"/>
+<animateMotion begin="0s" dur="6s" repeatCount="indefinite" values="0,0;-99,0"/>
+</g>
 
 <path d="m10 10L90 10L90 20L10 20L10 30L90 30L90 40L10 40L10 50L90 50L90 60L10 60L10 70L90 70L90 80L10 80L10 90L91 90" fill="none" stroke="black" stroke-width="2" opacity="1"/>
 <path d="m10 10L90 10L90 20L10 20L10 30L90 30L90 40L10 40L10 50L90 50L90 60L10 60L10 70L90 70L90 80L10 80L10 90L91 90" fill="none" stroke="black" stroke-width="6" stroke-dasharray="0 10" stroke-linecap="round"/>
@@ -141,10 +167,10 @@ text-anchor:middle;
 </g>
 
 <g id="selector" transform="translate(50 110)">
-<text class="center" y="0.5" id="item" fill="gold" font-size="5">🧨</text>
+<text class="center" y="0.5" id="item" fill="gold" font-size="5">⚡</text>
 </g>
 
-<g id="gate">
+<g id="gate" opacity="0.2">
 <g id="left_door">
 <image xlink:href="left_door.png" x="0" y="0" width="50" height="100"/>
 </g>
@@ -152,14 +178,16 @@ text-anchor:middle;
 <image xlink:href="right_door.png" x="50" y="0" width="50" height="100"/>
 </g>
 <g id="title" transform="translate(0 0)">
-<image xlink:href="title.png" x="0" y="0" width="100" height="100"/>
+<image xlink:href="title.png" x="0" y="0" width="100" height="100" filter="url(#fecolor)"/>
 </g>
 </g>
 </svg>
 
-<div id="div1"></div>
-<div id="div2"></div>
-<div id="div3"><table>
+<div id="div1"><image src="p1_normal.gif" width="250px" height="250px" style="image-rendering:pixelated;background-image:radial-gradient(white 0%,transparent 70%);"/></div>
+<div id="div2"><image src="p2_normal.gif" width="250px" height="250px"  style="image-rendering:pixelated"/></div>
+<div id="div3"></div>
+<div id="div4">
+<table>
 <tbody>
 <tr>
 <td id="item1_image">📦</td>
@@ -177,10 +205,11 @@ text-anchor:middle;
 <td id="item2_price">10$</td>
 </tr>
 <tr>
- <td colspan="3">⭐ ❤️ 👍 💥 🐢 🕷️ 🍄 🌩️ 🌪️ 🔥 🌊 🍌 🌶️ 🕳️ 💣 🔪 ⏱️ 🧨 🎁 💎 📜 💰 🗝️ ⚙️ 💊</td>
+<td colspan="3">⭐ ❤️ 👍 💥 🐢 🕷️ 🍄 🌪️ 🔥 🌊 🍌 🌶️ 🕳️ 🧪<br>💣 🔪 ⏱️ 🧨 🎁 💎 📜 💰 🗝️ ⚙️ 💊 ⚡ 🐱  👻</td>
 </tr>
 </table>
-</div>
+</div><br>
+<span id="reset_button">RESET</span>
 
 <script>
 /*jshint esversion:6*/
@@ -210,6 +239,7 @@ var orange_p=document.getElementById("orange_p");
 var death=document.getElementById("death");
 var end=document.getElementById("end");
 var selector=document.getElementById("selector");
+var reset_button=document.getElementById("reset_button");
 var item=document.getElementById("item");
 var gate=document.getElementById("gate");
 var title=document.getElementById("title");
@@ -218,7 +248,7 @@ var right_door=document.getElementById("right_door");
 var audio_open = new Audio("open.mp3");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","bonus9","warp1","warp2","blue_p","orange_p","death","end"];
 var used_space=["0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
-var faces=["0.png","1.png","2.png",];
+var faces=["0.png","1.png","2.png","3.png","4.png","5.png","6.png"];
 var coor=["10 10", "20 10", "30 10", "40 10", "50 10", "60 10", "70 10", "80 10", "90 10", "90 20",
  "80 20", "70 20", "60 20", "50 20", "40 20", "30 20", "20 20", "10 20", "10 30", "20 30", "30 30", "40 30", "50 30", "60 30", "70 30", "80 30", "90 30", "90 40", "80 40", "70 40", "60 40", "50 40", "40 40", "30 40", "20 40", "10 40", "10 50", "20 50", "30 50", "40 50", "50 50", "60 50", "70 50", "80 50", "90 50", "90 60", "80 60", "70 60", "60 60", "50 60", "40 60", "30 60", "20 60", "10 60", "10 70", "20 70", "30 70", "40 70", "50 70", "60 70", "70 70", "80 70", "90 70", "90 80", "80 80", "70 80", "60 80", "50 80", "40 80", "30 80", "20 80", "10 80", "10 90", "20 90", "30 90", "40 90", "50 90", "60 90", "70 90", "80 90", "90 90"];
 var pos_start,pos_p1,pos_p2,pos_b1,pos_b2,pos_b3,pos_b4,pos_b5,pos_b6,pos_b7,pos_b8,pos_b9,pos_warp1,pos_warp2,pos_blue,pos_orange,pos_death;
@@ -288,18 +318,19 @@ while(used_space.includes(coor[pos_death])==true){pos_death=Math.round(Math.rand
 death.setAttribute("transform", "translate("+coor[pos_death]+")");
 used_space=Object.assign([],used_space,{[14]:coor[pos_death]});
 
-<!--div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>"-->;
+//div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
 }
 
 reset();
-setInterval(reset,800);
-
+//setInterval(reset,800);
 gate.addEventListener("click",open);
+reset_button.addEventListener("click",reset);
 svg1.addEventListener("mousemove", event => {
 showCoords(event);
 });
 
 function open(){
+gate.removeEventListener("click",open);
 audio_open.play();
 left_door.setAttribute("transform", "translate(-50 0)");
 right_door.setAttribute("transform", "translate(50 0)");
@@ -314,8 +345,7 @@ my=(Math.round(((event.clientY-rect_top)/5)/10)*10);
 if(my<10){my=10;}
 if(my>90){my=90;}
 selector.setAttribute("transform", "translate("+mx+" "+my+")");
-
-<!--div1.innerHTML="<table><tbody><tr><td>"+mx+"</td><td>"+my+"</td></tr></tbody></table>";-->
+//div1.innerHTML="<table><tbody><tr><td>"+mx+"</td><td>"+my+"</td></tr></tbody></table>";
 }
 </script>
 </body>
