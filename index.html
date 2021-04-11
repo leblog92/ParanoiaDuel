@@ -34,7 +34,6 @@ padding-right:10px;
 #selector{
 transition:250ms;
 }
-<!--#svg1{}-->
 #div1{
 position:fixed;
 left:0;
@@ -46,7 +45,6 @@ right:0;
 top:0;
 }
 table{
-width:500px;
 background-color:lightgrey;
 margin-left: auto;
 margin-right: auto;
@@ -183,9 +181,25 @@ text-anchor:middle;
 </g>
 </svg>
 
-<div id="div1"><image src="p1_normal.gif" width="250px" height="250px" style="image-rendering:pixelated;background-image:radial-gradient(white 0%,transparent 70%);"/></div>
+<div id="div1">
+<table>
+<tbody>
+<tr>
+<td>Player 1</td>
+</tr>
+<tr>
+<td>
+<image src="p1_normal.gif" width="250px" height="250px" style="image-rendering:pixelated;background-image:radial-gradient(white 0%,transparent 70%);"/>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
 <div id="div2"><image src="p2_normal.gif" width="250px" height="250px"  style="image-rendering:pixelated"/></div>
+
 <div id="div3"></div>
+
 <div id="div4">
 <table>
 <tbody>
@@ -195,14 +209,14 @@ text-anchor:middle;
 <td id="item3_image">📦</td>
 </tr>
 <tr>
-<td id="item1_name">Item 1</td>
-<td id="item2_name">Item 2</td>
+<td id="item1_name">item 1</td>
+<td id="item2_name">item 2</td>
 <td id="item3_name">item 3</td>
 </tr>
 <tr>
-<td id="item1_price">10$</td>
-<td id="item2_price">10$</td>
-<td id="item2_price">10$</td>
+<td id="item1_price">--$</td>
+<td id="item2_price">--$</td>
+<td id="item2_price">--$</td>
 </tr>
 <tr>
 <td colspan="3">⭐ ❤️ 👍 💥 🐢 🕷️ 🍄 🌪️ 🔥 🌊 🍌 🌶️ 🕳️ 🧪<br>💣 🔪 ⏱️ 🧨 🎁 💎 📜 💰 🗝️ ⚙️ 💊 ⚡ 🐱  👻</td>
@@ -318,11 +332,9 @@ while(used_space.includes(coor[pos_death])==true){pos_death=Math.round(Math.rand
 death.setAttribute("transform", "translate("+coor[pos_death]+")");
 used_space=Object.assign([],used_space,{[14]:coor[pos_death]});
 
-//div2.innerHTML="<table><tr><td>"+space_name.join("</td><td>")+"</tr><tr><td>"+used_space.join("</td><td>")+"</tr></table>";
 }
 
 reset();
-//setInterval(reset,800);
 gate.addEventListener("click",open);
 reset_button.addEventListener("click",reset);
 svg1.addEventListener("mousemove", event => {
@@ -345,7 +357,6 @@ my=(Math.round(((event.clientY-rect_top)/5)/10)*10);
 if(my<10){my=10;}
 if(my>90){my=90;}
 selector.setAttribute("transform", "translate("+mx+" "+my+")");
-//div1.innerHTML="<table><tbody><tr><td>"+mx+"</td><td>"+my+"</td></tr></tbody></table>";
 }
 </script>
 </body>
