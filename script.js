@@ -36,7 +36,7 @@ var img_p1d2=document.getElementById("img_p1d2");
 var img_p2d1=document.getElementById("img_p2d1");
 var img_p2d2=document.getElementById("img_p2d2");
 var p1d1,p1d2,p2d1,d2d2;
-var audio_open = new Audio("open.mp3");
+var audio_open = new Audio("sounds/open.mp3");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","bonus9","warp1","warp2","blue_p","orange_p","death","end"];
 var used_space=["0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
 var faces=["images/0.png","images/1.png","images/2.png","images/3.png","images/4.png","images/5.png","images/6.png"];
