@@ -1,55 +1,63 @@
 html,body{
-height:100%;
-margin:0;
-text-align:center;
+	height:100%;
+	margin:0;
+	text-align:center;
 }
 body{
-background-color:#111;
-font-family:Consolas;
-user-select:none;
+	background-color:#111;
+	font-family:Consolas;
+	user-select:none;
 }
 #left_door,#right_door,#title,#start_title{
-transition:3s;
+	transition:3s;
 }
 #title{
-transition:6s;
+	transition:5s;
 }
-#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#bonus9,#warp1,#warp2,#blue_p,#orange_p,#death,#end{
-transition:400ms;
+#player1,#player2,#bonus1,#bonus2,#bonus3,#bonus4,#bonus5,#bonus6,#bonus7,#bonus8,#bonus9,#warp1,#warp2,#blue_p,#orange_p,#end{
+	transition:400ms;
 }
+#death{
+	transition:0.7s;
+}
+#skull{
+	transition:0.3s;
+}
+
+
 #reset_button{
 
 }
 #selector{
-transition:250ms;
+	transition:250ms;
 }
 #p1_button_rolldice,#p2_button_rolldice{
-opacity:0.4;
-transition:2s;
+	opacity:0.4;
+	transition:2s;
 }
 #div1{
-position:fixed;
-left:0;
-top:0;
+	position:fixed;
+	left:0;
+	top:0;
 }
 #div2{
-position:fixed;
-right:0;
-top:0;
+	position:fixed;
+	right:0;
+	top:0;
 }
 table{
-background-color:#333;
-margin-left: auto;
-margin-right: auto;
+	background-color:#333;
+	margin-left: auto;
+	margin-right: auto;
 }
 table,td{
-padding:5px;
-border:1px solid grey;
-border-collapse:collapse;
+	padding:5px;
+	border:1px solid grey;
+	border-collapse:collapse;
 }
 .center{
-dominant-baseline:middle;
-text-anchor:middle;
+	dominant-baseline:middle;
+	text-anchor:middle;
 }
 button{
 	font-family:Consolas;

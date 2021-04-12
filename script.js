@@ -18,6 +18,13 @@ var bonus6=document.getElementById("bonus6");
 var bonus7=document.getElementById("bonus7");
 var bonus8=document.getElementById("bonus8");
 var bonus9=document.getElementById("bonus9");
+var dc0=document.getElementById("dc0");
+var dc1=document.getElementById("dc1");
+var dc2=document.getElementById("dc2");
+var dc3=document.getElementById("dc3");
+var dc4=document.getElementById("dc4");
+var dc5=document.getElementById("dc5");
+var dc6=document.getElementById("dc6");
 var warp1=document.getElementById("warp1");
 var warp2=document.getElementById("warp2");
 var blue_p=document.getElementById("blue_p");
@@ -39,9 +46,11 @@ var img_p2d2=document.getElementById("img_p2d2");
 var message=document.getElementById("message");
 var p1_name=document.getElementById("p1_name");
 var p2_name=document.getElementById("p2_name");
+var skull=document.getElementById("skull");
 var p1d1,p1d2,p2d1,d2d2;
 var audio_open = new Audio("sounds/open.mp3");
 var audio_roll = new Audio("sounds/roll.mp3");
+var audio_death = new Audio("sounds/death_move.mp3");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","bonus9","warp1","warp2","blue_p","orange_p","death","end"];
 var used_space=["0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
 var faces=["images/0.png","images/1.png","images/2.png","images/3.png","images/4.png","images/5.png","images/6.png"];
@@ -51,8 +60,21 @@ var pos_start,pos_p1,pos_p2,pos_b1,pos_b2,pos_b3,pos_b4,pos_b5,pos_b6,pos_b7,pos
 var turn;
 var p1_button_rolldice=document.getElementById("p1_button_rolldice");
 var p2_button_rolldice=document.getElementById("p2_button_rolldice");
+var p1_td_money=document.getElementById("p1_td_money");;
+var p2_td_money=document.getElementById("p2_td_money");;
+var p1_money,p2_money,pos_target;
 
-function reset(){
+function init(){
+gate.addEventListener("click",open);
+img_p1d1.setAttribute("src",faces[0]);
+img_p1d2.setAttribute("src",faces[0]);
+img_p2d1.setAttribute("src",faces[0]);
+img_p2d2.setAttribute("src",faces[0]);
+p1_money=0;
+p2_money=0;
+p1_td_money.innerHTML=p1_money;
+p2_td_money.innerHTML=p2_money;
+	
 pos_start=0;
 used_space=Object.assign([],used_space,{[0]:coor[pos_start]});
 
@@ -117,8 +139,9 @@ while(used_space.includes(coor[pos_death])==true){pos_death=Math.round(Math.rand
 death.setAttribute("transform", "translate("+coor[pos_death]+")");
 used_space=Object.assign([],used_space,{[14]:coor[pos_death]});
 }
-reset();
-reset_button.addEventListener("click",reset);
+
+init();
+reset_button.addEventListener("click",init);
 
 function open(){
 gate.removeEventListener("click",open);
@@ -126,13 +149,10 @@ audio_open.play();
 left_door.setAttribute("transform", "translate(-50 0)");
 right_door.setAttribute("transform", "translate(50 0)");
 title.setAttribute("transform", "translate(0 -100)");
-start_title.setAttribute("transform", "translate(0 30)");
+start_title.setAttribute("transform", "translate(0 40)");
 turn="p1";
 start_turn();
 }
-gate.addEventListener("click",open);
-
-
 function showCoords(event){
 mx=(Math.round(((event.clientX-rect_left)/5)/10)*10);
 if(mx<10){mx=10;}
@@ -142,21 +162,24 @@ if(my<10){my=10;}
 if(my>90){my=90;}
 selector.setAttribute("transform", "translate("+mx+" "+my+")");
 }
-svg1.addEventListener("mousemove", event => {
-showCoords(event);
-});
+svg1.addEventListener("mousemove", event => {showCoords(event);});
 
 function rollDice(){
 if(turn=="p1"){
 	audio_roll.play();
-	p1d1=Math.round(Math.random()*5)+1;
+	// p1d1=Math.round(Math.random()*5)+1;
+	p1d1=1;
 	p1d2=Math.round(Math.random()*5)+1;
+	p1_money=p1_money+p1d1+p1d2;
+	p1_td_money.innerHTML=p1_money;
 	img_p1d1.setAttribute("src",faces[p1d1]);
 	img_p1d2.setAttribute("src",faces[p1d2]);
 }else if(turn=="p2"){
 	audio_roll.play();
 	p2d1=Math.round(Math.random()*5)+1;
 	p2d2=Math.round(Math.random()*5)+1;
+	p2_money=p2_money+p2d1+p2d2;
+	p2_td_money.innerHTML=p2_money;
 	img_p2d1.setAttribute("src",faces[p2d1]);
 	img_p2d2.setAttribute("src",faces[p2d2]);
 }else{
@@ -164,18 +187,17 @@ if(turn=="p1"){
 	img_p1d2.setAttribute("src",faces[0]);
 	img_p2d1.setAttribute("src",faces[0]);
 	img_p2d2.setAttribute("src",faces[0]);
+	}
 }
-}
-
 function start_turn(){
 	if(turn=="p1"){
-		message.innerHTML=p1_name.innerHTML+"'s turn";
+		message.innerHTML=p1_name.innerHTML+"'s turn. Push 'Roll Dice' button.";
 		p1_button_rolldice.style.opacity="1";
 		p2_button_rolldice.style.opacity="0.4";
 		p1_button_rolldice.addEventListener("click",p1play);
 		p2_button_rolldice.removeEventListener("click",p2play);
 	}else if(turn=="p2"){
-		message.innerHTML=p2_name.innerHTML+"'s turn";
+		message.innerHTML=p2_name.innerHTML+"'s turn. Push 'Roll Dice' button.";
 		p1_button_rolldice.style.opacity="0.4";
 		p2_button_rolldice.style.opacity="1";
 		p1_button_rolldice.removeEventListener("click",p1play);
@@ -191,18 +213,51 @@ function start_turn(){
 		img_p2d2.setAttribute("src",faces[0]);
 	}
 }
-
 function p1play(){
 	rollDice();
+	if(p1d1==1||p1d2==1){movedeath();
+	}else{
+	p2d1==0;p2d2==0;
 	img_p2d1.setAttribute("src",faces[0]);
 	img_p2d2.setAttribute("src",faces[0]);
 	turn="p2";
 	start_turn();
+	}
 }
 function p2play(){
 	rollDice();
+	if(p1d1==1||p1d2==1){movedeath();}
+	p1d1==0;p1d2==0;
 	img_p1d1.setAttribute("src",faces[0]);
 	img_p1d2.setAttribute("src",faces[0]);
 	turn="p1";
 	start_turn();
+}
+function movedeath(){
+	audio_death.play();
+	if(pos_p1>pos_p2){pos_target=pos_p1;
+	}else if(pos_p2>pos_p1){pos_target=pos_p2;
+	}else{pos_target=pos_p1;}
+	dc0.setAttribute("transform", "translate("+coor[pos_target]+")");
+	dc1.setAttribute("transform", "translate("+coor[pos_target+1]+")");
+	dc2.setAttribute("transform", "translate("+coor[pos_target+2]+")");
+	dc3.setAttribute("transform", "translate("+coor[pos_target+3]+")");
+	dc4.setAttribute("transform", "translate("+coor[pos_target+4]+")");
+	dc5.setAttribute("transform", "translate("+coor[pos_target+5]+")");
+	dc6.setAttribute("transform", "translate("+coor[pos_target+6]+")");	
+	pos_death=pos_target+Math.round(Math.random()*6);
+	while(used_space.includes(coor[pos_death])==true){pos_death=pos_target+Math.round(Math.random()*6);}
+	used_space=Object.assign([],used_space,{[14]:coor[pos_death]});
+	skull.setAttribute("font-size", "10px");
+	death.setAttribute("transform", "translate("+coor[pos_death]+")");
+	setTimeout(function() {
+        skull.setAttribute("font-size", "4px");
+    },600);
+	if(turn=="p1"){
+		turn="p2";
+		start_turn();
+	}else if(turn=="p2"){
+		turn="p1";
+		start_turn();
+	}
 }

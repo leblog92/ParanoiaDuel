@@ -3,12 +3,12 @@
 <head>
 <title>Paranoia Duel 2</title>
 <meta charset="utf-8">
-<link rel="icon" href="images/2.png" type="image/png"> 
+<link rel="icon" href="images/skull.png" type="image/png"> 
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<svg width="500px" height="500px" viewBox="0 0 100 100" id="svg1">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500px" height="500px" viewBox="0 0 100 100" id="svg1">
 <defs>
 <filter id="fecolor">
 <fecolormatrix type="hueRotate">
@@ -122,13 +122,27 @@
 </g>
 </g>
 
-<circle cx="-50" cy="20" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
-<circle cx="-50" cy="30" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
-<circle cx="-50" cy="40" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
-<circle cx="-50" cy="50" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
-<circle cx="-50" cy="60" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
-<circle cx="-50" cy="70" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
-<circle cx="-50" cy="80" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+<g id="dc0" transform="translate(-50 20)">
+<circle cx="0" cy="0" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+</g>
+<g id="dc1" transform="translate(-50 30)">
+<circle cx="0" cy="0" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+</g>
+<g id="dc2" transform="translate(-50 40)">
+<circle cx="0" cy="0" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+</g>
+<g id="dc3" transform="translate(-50 50)">
+<circle cx="0" cy="0" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+</g>
+<g id="dc4" transform="translate(-50 60)">
+<circle cx="0" cy="0" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+</g>
+<g id="dc5" transform="translate(-50 70)">
+<circle cx="0" cy="0" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+</g>
+<g id="dc6" transform="translate(-50 80)">
+<circle cx="0" cy="0" r="2.5" fill="none" stroke="white" stroke-width="0.5" filter="url(#blur2)"/>
+</g>
 
 <rect width="100" height="100" stroke-width="0.5" stroke="grey" fill="none"/>
 </svg>
@@ -136,19 +150,14 @@
 <div id="div1">
 <table>
 <tbody>
+<tr><td style="color:royalblue;font-weight:bold;" contenteditable="true" colspan="2" id="p1_name">Player 1</td></tr>
+<tr><td colspan="2"><image src="images/p1_normal.gif" width="200px" height="200px" style="image-rendering:pixelated;"/></td></tr>
+<tr><td colspan="2"><button id="p1_button_rolldice">Roll Dice</button></td></tr>
 <tr>
-<td style="color:royalblue;font-weight:bold;" contenteditable="true" colspan="2" id="p1_name">Player 1</td>
+	<td><img id="img_p1d1" src="images/0.png" width="80px"/></td>
+	<td><img id="img_p1d2" src="images/0.png" width="80px"/></td>
 </tr>
-<tr>
-<td colspan="2">
-<image src="images/p1_normal.gif" width="200px" height="200px" style="image-rendering:pixelated;"/>
-</td>
-</tr>
-<td colspan="2"><button id="p1_button_rolldice">Roll Dice</button></td>
-<tr>
-<td><img id="img_p1d1" src="images/0.png" width="80px"/></td>
-<td><img id="img_p1d2" src="images/0.png" width="80px"/></td>
-</tr>
+<tr><td colspan="2"><span id="p1_td_money"></span>$</td></tr>
 </tbody>
 </table>
 </div>
@@ -156,21 +165,14 @@
 <div id="div2">
 <table>
 <tbody>
+<tr><td style="color:crimson;font-weight:bold;" contenteditable="true" colspan="2" id="p2_name">Player 2</td></tr>
+<tr><td colspan="2"><image src="images/p2_normal.gif" width="200px" height="200px" style="image-rendering:pixelated;"/></td></tr>
+<tr><td colspan="2"><button id="p2_button_rolldice">Roll Dice</button></td></tr>
 <tr>
-<td style="color:crimson;font-weight:bold;" contenteditable="true" colspan="2" id="p2_name">Player 2</td>
+	<td><img id="img_p2d1" src="images/0.png" width="80px"/></td>
+	<td><img id="img_p2d2" src="images/0.png" width="80px"/></td>
 </tr>
-<tr>
-<td colspan="2">
-<image src="images/p2_normal.gif" width="200px" height="200px" style="image-rendering:pixelated;"/>
-</td>
-</tr>
-<tr>
-<td colspan="2"><button id="p2_button_rolldice">Roll Dice</button></td>
-</tr>
-<tr>
-<td><img id="img_p2d1" src="images/0.png" width="80px"/></td>
-<td><img id="img_p2d2" src="images/0.png" width="80px"/></td>
-</tr>
+<tr><td colspan="2"><span id="p2_td_money"></span>$</td></tr>
 </tbody>
 </table>
 </div>
@@ -197,9 +199,9 @@
 <td id="item3_name">nothing</td>
 </tr>
 <tr>
-<td id="item1_price">--$</td>
-<td id="item2_price">--$</td>
-<td id="item2_price">--$</td>
+<td><span id="item1_price">--</span>$</td>
+<td><span id="item2_price">--</span>$</td>
+<td><span id="item2_price">--</span>$</td>
 </tr>
 <tr>
 <td colspan="3">⭐ ❤️ 👍 💥 🐢 🕷️ 🍄 🌪️ 🔥 🌊 🍌 🌶️ 🕳️ 🧪<br>💣 🔪 ⏱️ 🧨 🎁 💎 📜 💰 🗝️ ⚙️ 💊 ⚡ 🐱  👻</td>
