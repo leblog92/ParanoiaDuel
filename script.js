@@ -35,6 +35,9 @@ var img_p1d1=document.getElementById("img_p1d1");
 var img_p1d2=document.getElementById("img_p1d2");
 var img_p2d1=document.getElementById("img_p2d1");
 var img_p2d2=document.getElementById("img_p2d2");
+var message=document.getElementById("message");
+var p1_name=document.getElementById("p1_name");
+var p2_name=document.getElementById("p2_name");
 var p1d1,p1d2,p2d1,d2d2;
 var audio_open = new Audio("sounds/open.mp3");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","bonus9","warp1","warp2","blue_p","orange_p","death","end"];
@@ -121,6 +124,8 @@ audio_open.play();
 left_door.setAttribute("transform", "translate(-50 0)");
 right_door.setAttribute("transform", "translate(50 0)");
 title.setAttribute("transform", "translate(0 -100)");
+turn="p1";
+start_turn();
 }
 gate.addEventListener("click",open);
 
@@ -160,11 +165,13 @@ rollDice();
 
 function start_turn(){
 	if(turn=="p1"){
+		message.innerHTML=p1_name.innerHTML+"'s turn";
 		p1_button_rolldice.style.opacity="1";
 		p2_button_rolldice.style.opacity="0.4";
 		p1_button_rolldice.addEventListener("click",p1play)
 		p2_button_rolldice.removeEventListener("click",p2play)
 	}else if(turn=="p2"){
+		message.innerHTML=p2_name.innerHTML+"'s turn";;
 		p1_button_rolldice.style.opacity="0.4";
 		p2_button_rolldice.style.opacity="1";
 		p1_button_rolldice.removeEventListener("click",p1play)
@@ -176,4 +183,6 @@ function start_turn(){
 		p2_button_rolldice.removeEventListener("click",p2play)
 	}
 }
-start_turn();
+
+function p1play(){}
+function p2play(){}

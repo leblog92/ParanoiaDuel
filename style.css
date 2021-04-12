@@ -23,6 +23,10 @@ transition:400ms;
 #selector{
 transition:250ms;
 }
+#p1_button_rolldice,#p2_button_rolldice{
+opacity:0.4;
+transition:2s;
+}
 #div1{
 position:fixed;
 left:0;
@@ -46,4 +50,9 @@ border-collapse:collapse;
 .center{
 dominant-baseline:middle;
 text-anchor:middle;
+}
+button{
+	border-radius:10px;
+	width:50px;
+	height:50px;
 }
