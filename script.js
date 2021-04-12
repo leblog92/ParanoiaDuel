@@ -162,12 +162,18 @@ function start_turn(){
 	if(turn=="p1"){
 		p1_button_rolldice.style.opacity="1";
 		p2_button_rolldice.style.opacity="0.4";
+		p1_button_rolldice.addEventListener("click",p1play)
+		p2_button_rolldice.removeEventListener("click",p2play)
 	}else if(turn=="p2"){
 		p1_button_rolldice.style.opacity="0.4";
 		p2_button_rolldice.style.opacity="1";
+		p1_button_rolldice.removeEventListener("click",p1play)
+		p2_button_rolldice.addEventListener("click",p2play)
 	}else{
 		p1_button_rolldice.style.opacity="0.4";
 		p2_button_rolldice.style.opacity="0.4";
+		p1_button_rolldice.removeEventListener("click",p1play)
+		p2_button_rolldice.removeEventListener("click",p2play)
 	}
 }
 start_turn();
