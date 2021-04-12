@@ -31,6 +31,7 @@ var gate=document.getElementById("gate");
 var title=document.getElementById("title");
 var left_door=document.getElementById("left_door");
 var right_door=document.getElementById("right_door");
+var start_title=document.getElementById("start_title");
 var img_p1d1=document.getElementById("img_p1d1");
 var img_p1d2=document.getElementById("img_p1d2");
 var img_p2d1=document.getElementById("img_p2d1");
@@ -40,6 +41,7 @@ var p1_name=document.getElementById("p1_name");
 var p2_name=document.getElementById("p2_name");
 var p1d1,p1d2,p2d1,d2d2;
 var audio_open = new Audio("sounds/open.mp3");
+var audio_roll = new Audio("sounds/roll.mp3");
 var space_name=["start","bonus1","bonus2","bonus3","bonus4","bonus5","bonus6","bonus7","bonus8","bonus9","warp1","warp2","blue_p","orange_p","death","end"];
 var used_space=["0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","0 0","90 90"];
 var faces=["images/0.png","images/1.png","images/2.png","images/3.png","images/4.png","images/5.png","images/6.png"];
@@ -124,6 +126,7 @@ audio_open.play();
 left_door.setAttribute("transform", "translate(-50 0)");
 right_door.setAttribute("transform", "translate(50 0)");
 title.setAttribute("transform", "translate(0 -100)");
+start_title.setAttribute("transform", "translate(0 30)");
 turn="p1";
 start_turn();
 }
@@ -145,11 +148,13 @@ showCoords(event);
 
 function rollDice(){
 if(turn=="p1"){
+	audio_roll.play();
 	p1d1=Math.round(Math.random()*5)+1;
 	p1d2=Math.round(Math.random()*5)+1;
 	img_p1d1.setAttribute("src",faces[p1d1]);
 	img_p1d2.setAttribute("src",faces[p1d2]);
 }else if(turn=="p2"){
+	audio_roll.play();
 	p2d1=Math.round(Math.random()*5)+1;
 	p2d2=Math.round(Math.random()*5)+1;
 	img_p2d1.setAttribute("src",faces[p2d1]);
@@ -161,28 +166,43 @@ if(turn=="p1"){
 	img_p2d2.setAttribute("src",faces[0]);
 }
 }
-rollDice();
 
 function start_turn(){
 	if(turn=="p1"){
 		message.innerHTML=p1_name.innerHTML+"'s turn";
 		p1_button_rolldice.style.opacity="1";
 		p2_button_rolldice.style.opacity="0.4";
-		p1_button_rolldice.addEventListener("click",p1play)
-		p2_button_rolldice.removeEventListener("click",p2play)
+		p1_button_rolldice.addEventListener("click",p1play);
+		p2_button_rolldice.removeEventListener("click",p2play);
 	}else if(turn=="p2"){
-		message.innerHTML=p2_name.innerHTML+"'s turn";;
+		message.innerHTML=p2_name.innerHTML+"'s turn";
 		p1_button_rolldice.style.opacity="0.4";
 		p2_button_rolldice.style.opacity="1";
-		p1_button_rolldice.removeEventListener("click",p1play)
-		p2_button_rolldice.addEventListener("click",p2play)
+		p1_button_rolldice.removeEventListener("click",p1play);
+		p2_button_rolldice.addEventListener("click",p2play);
 	}else{
 		p1_button_rolldice.style.opacity="0.4";
 		p2_button_rolldice.style.opacity="0.4";
-		p1_button_rolldice.removeEventListener("click",p1play)
-		p2_button_rolldice.removeEventListener("click",p2play)
+		p1_button_rolldice.removeEventListener("click",p1play);
+		p2_button_rolldice.removeEventListener("click",p2play);
+		img_p1d1.setAttribute("src",faces[0]);
+		img_p1d2.setAttribute("src",faces[0]);
+		img_p2d1.setAttribute("src",faces[0]);
+		img_p2d2.setAttribute("src",faces[0]);
 	}
 }
 
-function p1play(){}
-function p2play(){}
+function p1play(){
+	rollDice();
+	img_p2d1.setAttribute("src",faces[0]);
+	img_p2d2.setAttribute("src",faces[0]);
+	turn="p2";
+	start_turn();
+}
+function p2play(){
+	rollDice();
+	img_p1d1.setAttribute("src",faces[0]);
+	img_p1d2.setAttribute("src",faces[0]);
+	turn="p1";
+	start_turn();
+}
