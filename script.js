@@ -43,7 +43,7 @@ var faces=["images/0.png","images/1.png","images/2.png","images/3.png","images/4
 var coor=["10 10", "20 10", "30 10", "40 10", "50 10", "60 10", "70 10", "80 10", "90 10", "90 20",
  "80 20", "70 20", "60 20", "50 20", "40 20", "30 20", "20 20", "10 20", "10 30", "20 30", "30 30", "40 30", "50 30", "60 30", "70 30", "80 30", "90 30", "90 40", "80 40", "70 40", "60 40", "50 40", "40 40", "30 40", "20 40", "10 40", "10 50", "20 50", "30 50", "40 50", "50 50", "60 50", "70 50", "80 50", "90 50", "90 60", "80 60", "70 60", "60 60", "50 60", "40 60", "30 60", "20 60", "10 60", "10 70", "20 70", "30 70", "40 70", "50 70", "60 70", "70 70", "80 70", "90 70", "90 80", "80 80", "70 80", "60 80", "50 80", "40 80", "30 80", "20 80", "10 80", "10 90", "20 90", "30 90", "40 90", "50 90", "60 90", "70 90", "80 90", "90 90"];
 var pos_start,pos_p1,pos_p2,pos_b1,pos_b2,pos_b3,pos_b4,pos_b5,pos_b6,pos_b7,pos_b8,pos_b9,pos_warp1,pos_warp2,pos_blue,pos_orange,pos_death;
-var turn="p1";
+var turn;
 
 function reset(){
 pos_start=0;
@@ -138,15 +138,20 @@ selector.setAttribute("transform", "translate("+mx+" "+my+")");
 
 function rollDice(){
 if(turn=="p1"){
-p1d1=Math.round(Math.random()*5)+1;
-p1d2=Math.round(Math.random()*5)+1;
-img_p1d1.setAttribute("src",faces[p1d1]);
-img_p1d2.setAttribute("src",faces[p1d2]);
+	p1d1=Math.round(Math.random()*5)+1;
+	p1d2=Math.round(Math.random()*5)+1;
+	img_p1d1.setAttribute("src",faces[p1d1]);
+	img_p1d2.setAttribute("src",faces[p1d2]);
+}else if(turn=="p2"){
+	p2d1=Math.round(Math.random()*5)+1;
+	p2d2=Math.round(Math.random()*5)+1;
+	img_p2d1.setAttribute("src",faces[p2d1]);
+	img_p2d2.setAttribute("src",faces[p2d2]);
 }else{
-p2d1=Math.round(Math.random()*5)+1;
-p2d2=Math.round(Math.random()*5)+1;
-img_p2d1.setAttribute("src",faces[p2d1]);
-img_p2d2.setAttribute("src",faces[p2d2]);
+	img_p1d1.setAttribute("src",faces[0]);
+	img_p1d2.setAttribute("src",faces[0]);
+	img_p2d1.setAttribute("src",faces[0]);
+	img_p2d2.setAttribute("src",faces[0]);
 }
 }
 rollDice();
