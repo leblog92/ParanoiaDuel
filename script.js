@@ -163,3 +163,7 @@ if(my>90){my=90;}
 selector.setAttribute("transform", "translate("+mx+" "+my+")");
 }
 svg1.addEventListener("mousemove", event => {showCoords(event);});
+
+function start_turn(){
+	
+}
